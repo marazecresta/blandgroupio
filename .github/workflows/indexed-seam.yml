@@ -1,0 +1,15 @@
+name: indexed-seam
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: chmod +x fire_go.sh && ./fire_go.sh
